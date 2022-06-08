@@ -5,6 +5,7 @@ const Schema = mongoose.Schema;
 const taskSchema = new Schema({
   name: String,
   description: String,
+  number: String
   //   status: Boolean,
 });
 

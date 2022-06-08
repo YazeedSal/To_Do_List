@@ -20,11 +20,14 @@ addTaskBtn.addEventListener("click", addItemsToDB);
 
 const renderItems = function (tasks) {
   taskContainer.innerHTML = "";
+  let taskNum = 0
   tasks.forEach((task) => {
+    taskNum += 1
     const { name, description, _id } = task;
 
     const newContainer = `
         <div class="item" id = "${_id}">
+        <h3>Task Number : ${taskNum}</h3>
          <h2>name:${name} </h2>
         <h3>description: ${description}</h3>
         </div>

@@ -4,3 +4,10 @@
     background-color: darkslategray;
 
 }
+.item{
+    background-color: aliceblue;
+    border: 10px;
+    border-color: black;
+    width: 200px;
+
+}
