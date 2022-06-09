@@ -1,4 +1,5 @@
 const express = require("express");
+const { deleteOne } = require("../models/task.model");
 const Task = require("../models/task.model");
 const router = express.Router();
 
@@ -13,11 +14,17 @@ router.get("/getTasks", async function (req, res) {
   res.send(tasks);
 });
 
-// router.put("editTask", async function (req,res) {
-//     const {body} = req
-//    const task = await Task.find((task) => body.id ==id )
+// router.put("/editTask", async function (req,res) {
+//     const {_id} = req.body
+//    const task = await Task.findById((task) => body._id ==_id )
 //    task.status = body.status
 //    res.send(`the object with the id of ${body.id} is changed`)
 // })
 
+
+router.delete("/deleteTask",async function (req,res) {
+ const {_id} = req.body
+ await Task.deleteOne({_id})
+ res.send(`the task has been deleted`)
+})
 module.exports = router;

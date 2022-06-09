@@ -10,19 +10,19 @@ const getInputValues = function () {
   return { name, description };
 };
 
-const addItemsToDB = async function () {
+const addTasksToDB = async function () {
   const task = getInputValues();
   const dbRes = await axios.post("/task/addTask", task);
-  getItemsFromDB();
+  getTasksFromDB();
 };
 
-addTaskBtn.addEventListener("click", addItemsToDB);
+addTaskBtn.addEventListener("click", addTasksToDB);
 
-const renderItems = function (tasks) {
+const renderTasks = function (tasks) {
   taskContainer.innerHTML = "";
-  let taskNum = 0
+  let taskNum = 0;
   tasks.forEach((task) => {
-    taskNum += 1
+    taskNum += 1;
     const { name, description, _id } = task;
 
     const newContainer = `
@@ -30,14 +30,41 @@ const renderItems = function (tasks) {
         <h3>Task Number : ${taskNum}</h3>
          <h2>name:${name} </h2>
         <h3>description: ${description}</h3>
+        <button id = "deleteBtn" onclick="i()"><i class="material-icons">delete</i></button>
         </div>
         `;
     taskContainer.innerHTML += newContainer;
   });
 };
 
-const getItemsFromDB = async function () {
+const i = function () {
+  console.log('this is working');
+}
+// taskContainer.addEventListener("click", function (e) {
+//   console.log(e);
+//   let target = e.target;
+//    console.log(target);
+//  target += ""
+//   if (!target.match('i')) {
+//     console.log("okay");
+//     deleteItems(target)
+//   } else {
+//   console.log("not okay");
+//   }
+// });
+
+// const deleteItems = async function (yazeed) {
+//   console.log(yazeed);
+//   //const _id = yazeed.id
+//   //const task = await axios.delete("task/deleteTask", _id);
+//   getItemsFromDB();
+//  // console.log(`good ? ${_id} ${task.data}`);
+// };
+
+const getTasksFromDB = async function () {
+  nameInput.value =""
+  descriptionInput.value = ""
   const tasks = await $.get("/task/getTasks");
-  renderItems(tasks);
+  renderTasks(tasks);
 };
-getTaskBtn.addEventListener("click", getItemsFromDB);
+getTaskBtn.addEventListener("click", getTasksFromDB);
